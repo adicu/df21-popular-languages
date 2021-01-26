@@ -433,9 +433,9 @@ func main() {
 }
 ```
 
-<hr/>
-
 View the solution code [here](./solutions/1-autocorrect.go).
+
+<hr/>
 
 ### Rust
 
