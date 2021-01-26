@@ -260,9 +260,46 @@ According to Wikipedia, Levenshtein Distance between two words is *the minimum n
 
 ![https://23o0161033pm1289qo1hzrwi-wpengine.netdna-ssl.com/wp-content/uploads/2017/01/SIX.jpg](./files/levenshtein.jpg)
 
+<hr/>
+
 ### Python
 
 [Click here](https://www.tutorialspoint.com/execute_python3_online.php) to begin coding in Python.
+
+**Skeleton Code**
+```python
+# Citation: Wikipedia, author: Christopher P. Matthews
+def levenshtein(s, t):
+        if s == t: return 0
+        elif len(s) == 0: return len(t)
+        elif len(t) == 0: return len(s)
+        
+        v0 = [None] * (len(t) + 1)
+        v1 = [None] * (len(t) + 1)
+        
+        for i in range(len(v0)):
+            v0[i] = i
+        for i in range(len(s)):
+            v1[0] = i + 1
+            for j in range(len(t)):
+                cost = 0 if s[i] == t[j] else 1
+                v1[j + 1] = min(v1[j] + 1, v0[j + 1] + 1, v0[j] + cost)
+            for j in range(len(v0)):
+                v0[j] = v1[j]
+                
+        return v1[len(t)]
+
+print("{}".format(levenshtein("bar", "bat")))
+
+# TODO: Fill in dictionary
+dictionary = 
+
+def autocorrect(word):
+    # TODO: Implement this
+
+print(autocorrect("babana"))
+```
+
 
 <hr/>
 
