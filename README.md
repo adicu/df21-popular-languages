@@ -252,23 +252,60 @@ Now that we've briefly glossed over important coding concepts, we will now dive 
 
 <hr/>
 
-### Python
-
-[Click here](https://www.tutorialspoint.com/execute_python3_online.php) to begin coding in Python.
-
-<hr/>
-
-### JavaScript/Node.js
-
-[Click here](https://www.tutorialspoint.com/execute_nodejs_online.php) to begin coding in JavaScript.
-
-#### Let's Create "Autocorrect"
+### Let's Create "Autocorrect"
 
 We will be using the concept of [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance#:~:text=Informally%2C%20the%20Levenshtein%20distance%20between,considered%20this%20distance%20in%201965.) to create a function that autorrects a misspelled word into a correctly spelled word from a dictionary we create.
 
 According to Wikipedia, Levenshtein Distance between two words is *the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other*.
 
 ![https://23o0161033pm1289qo1hzrwi-wpengine.netdna-ssl.com/wp-content/uploads/2017/01/SIX.jpg](./files/levenshtein.jpg)
+
+<hr/>
+
+### Python
+
+[Click here](https://www.tutorialspoint.com/execute_python3_online.php) to begin coding in Python.
+
+**Skeleton Code**
+```python
+# Citation: Wikipedia, author: Christopher P. Matthews
+def levenshtein(s, t):
+        if s == t: return 0
+        elif len(s) == 0: return len(t)
+        elif len(t) == 0: return len(s)
+        
+        v0 = [None] * (len(t) + 1)
+        v1 = [None] * (len(t) + 1)
+        
+        for i in range(len(v0)):
+            v0[i] = i
+        for i in range(len(s)):
+            v1[0] = i + 1
+            for j in range(len(t)):
+                cost = 0 if s[i] == t[j] else 1
+                v1[j + 1] = min(v1[j] + 1, v0[j + 1] + 1, v0[j] + cost)
+            for j in range(len(v0)):
+                v0[j] = v1[j]
+                
+        return v1[len(t)]
+
+print("{}".format(levenshtein("bar", "bat")))
+
+# TODO: Fill in dictionary
+dictionary = 
+
+def autocorrect(word):
+    # TODO: Implement this
+
+print(autocorrect("babana"))
+```
+View the solution code [here](./solutions/0-autocorrect.py).
+
+<hr/>
+
+### JavaScript/Node.js
+
+[Click here](https://www.tutorialspoint.com/execute_nodejs_online.php) to begin coding in JavaScript.
 
 **Skeleton Code**
 ```js
@@ -316,11 +353,98 @@ View the solution code [here](./solutions/2-autocorrect.js).
 
 [Click here](https://www.tutorialspoint.com/execute_golang_online.php) to begin coding in Go.
 
+```go
+package main
+
+import "fmt"
+
+// Source: https://github.com/agnivade/levenshtein/blob/master/levenshtein.go
+func ComputeDistance(a, b string) int {
+	if len(a) == 0 {
+		return len(b)
+	}
+
+	if len(b) == 0 {
+		return len(a)
+	}
+
+	if a == b {
+		return 0
+	}
+
+	// We need to convert to []rune if the strings are non-ASCII.
+	// This could be avoided by using utf8.RuneCountInString
+	// and then doing some juggling with rune indices,
+	// but leads to far more bounds checks. It is a reasonable trade-off.
+	s1 := []rune(a)
+	s2 := []rune(b)
+
+	// swap to save some memory O(min(a,b)) instead of O(a)
+	if len(s1) > len(s2) {
+		s1, s2 = s2, s1
+	}
+	lenS1 := len(s1)
+	lenS2 := len(s2)
+
+	// init the row
+	x := make([]uint16, lenS1+1)
+	// we start from 1 because index 0 is already 0.
+	for i := 1; i < len(x); i++ {
+		x[i] = uint16(i)
+	}
+
+	// make a dummy bounds check to prevent the 2 bounds check down below.
+	// The one inside the loop is particularly costly.
+	_ = x[lenS1]
+	// fill in the rest
+	for i := 1; i <= lenS2; i++ {
+		prev := uint16(i)
+		for j := 1; j <= lenS1; j++ {
+			current := x[j-1] // match
+			if s2[i-1] != s1[j-1] {
+				current = min(min(x[j-1]+1, prev+1), x[j]+1)
+			}
+			x[j-1] = prev
+			prev = current
+		}
+		x[lenS1] = prev
+	}
+	return int(x[lenS1])
+}
+
+func min(a, b uint16) uint16 {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+// TODO: fill in dictionary
+var dictionary = [...]string{
+}
+
+func Autocorrect(word string) string {
+    // TODO: Write function
+}
+
+func main() {
+	fmt.Println(ComputeDistance("bar","bat"))
+	fmt.Println(Autocorrect("babana"))
+}
+```
+
+View the solution code [here](./solutions/1-autocorrect.go).
+
 <hr/>
 
 ### Rust
 
-[Click here](https://www.tutorialspoint.com/compile_rust_online.php) to begin coding in Go.
+[Click here](https://www.tutorialspoint.com/compile_rust_online.php) to begin coding in Rust.
+
+```rust
+```
+
+View the solution code [here](./solutions/3-autocorrect.rs).
 
 <hr/>
 
