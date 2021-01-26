@@ -252,6 +252,14 @@ Now that we've briefly glossed over important coding concepts, we will now dive 
 
 <hr/>
 
+### Let's Create "Autocorrect"
+
+We will be using the concept of [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance#:~:text=Informally%2C%20the%20Levenshtein%20distance%20between,considered%20this%20distance%20in%201965.) to create a function that autorrects a misspelled word into a correctly spelled word from a dictionary we create.
+
+According to Wikipedia, Levenshtein Distance between two words is *the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other*.
+
+![https://23o0161033pm1289qo1hzrwi-wpengine.netdna-ssl.com/wp-content/uploads/2017/01/SIX.jpg](./files/levenshtein.jpg)
+
 ### Python
 
 [Click here](https://www.tutorialspoint.com/execute_python3_online.php) to begin coding in Python.
@@ -261,14 +269,6 @@ Now that we've briefly glossed over important coding concepts, we will now dive 
 ### JavaScript/Node.js
 
 [Click here](https://www.tutorialspoint.com/execute_nodejs_online.php) to begin coding in JavaScript.
-
-#### Let's Create "Autocorrect"
-
-We will be using the concept of [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance#:~:text=Informally%2C%20the%20Levenshtein%20distance%20between,considered%20this%20distance%20in%201965.) to create a function that autorrects a misspelled word into a correctly spelled word from a dictionary we create.
-
-According to Wikipedia, Levenshtein Distance between two words is *the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other*.
-
-![https://23o0161033pm1289qo1hzrwi-wpengine.netdna-ssl.com/wp-content/uploads/2017/01/SIX.jpg](./files/levenshtein.jpg)
 
 **Skeleton Code**
 ```js
