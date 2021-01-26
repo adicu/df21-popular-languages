@@ -6,7 +6,7 @@ fn levenshtein(a: &str, b: &str) -> usize {
     if a == b {
         return result;
     }
-    
+
     let length_a = a.chars().count();
     let length_b = b.chars().count();
 
@@ -78,21 +78,21 @@ fn autocorrect(word: &str) -> &str {
         "pineapple",
     ];
 
-    let mut shortestDistance = word.chars().count();
-    let mut correctWord = word;
+    let mut shortest_distance = word.chars().count();
+    let mut correct_word = word;
 
-    for dictionaryWord in &dictionary {
-        let currentDistance = levenshtein(word, dictionaryWord);
-        if (currentDistance < shortestDistance) {
-            shortestDistance = currentDistance;
-            correctWord = dictionaryWord;
+    for dictionary_word in &dictionary {
+        let current_distance = levenshtein(word, dictionary_word);
+        if current_distance < shortest_distance {
+            shortest_distance = current_distance;
+            correct_word = dictionary_word;
         }
     }
 
-    correctWord
+    correct_word
 }
 
 fn main() {
     println!("{}", levenshtein("bar", "bat"));
-    println!("{}", autocorrect("babana"));
+    println!("{}", autocorrect("manco"));
 }
